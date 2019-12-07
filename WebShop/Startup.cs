@@ -46,11 +46,13 @@ namespace WebShop
 
             app.UseAuthorization();
 
+            // routes
             app.UseEndpoints(endpoints =>
             {
+                // defines default routing - so where to go if we won't specify any controller in the URL
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "default", // name can be anything
+                    pattern: "{controller=Home}/{action=Privacy}/{id?}"); // id is optional
             });
         }
     }

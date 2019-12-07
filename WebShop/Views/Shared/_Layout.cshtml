@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+
+<!-- this is main layout file, all smaller views are injected into this one -->
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,6 +34,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <!-- here is where smaller views are injected in the action method -->
             @RenderBody()
         </main>
     </div>
