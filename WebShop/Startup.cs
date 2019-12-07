@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebShop.Infrastructure;
 
 namespace WebShop
 {
@@ -24,6 +26,8 @@ namespace WebShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<WebShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WebShopContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +57,10 @@ namespace WebShop
                 endpoints.MapControllerRoute(
                     name: "default", // name can be anything
                     pattern: "{controller=Home}/{action=Privacy}/{id?}"); // id is optional
+
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Pages}/{action=Index}/{id?}");
             });
         }
     }
